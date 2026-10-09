@@ -72,8 +72,11 @@ def run(primary: str, target: str, backend: str, auto: bool) -> dict:
     # Cho health check phat hien UNHEALTHY neu dang co drill dien ra
     health_log = pathlib.Path("reports/health-events.jsonl")
     detected = False
+    consecutive_fails = 0
     start_wait = time.time()
     while time.time() - start_wait < 25.0:
+        latest_health = None
+        now = time.time()
         if health_log.exists():
             lines = [l for l in health_log.read_text().splitlines() if l.strip()]
             for line in lines:
@@ -81,20 +84,23 @@ def run(primary: str, target: str, backend: str, auto: bool) -> dict:
                     ev = json.loads(line)
                     if (ev.get("event") == "state_change" and
                             ev.get("region") == primary and
-                            ev.get("to") == "UNHEALTHY" and
-                            ev.get("ts", 0) >= run_start - 30.0):
-                        detected = True
-                        break
+                            run_start - 30.0 <= ev.get("ts", 0) <= now):
+                        if latest_health is None or ev["ts"] >= latest_health["ts"]:
+                            latest_health = ev
                 except Exception:
                     pass
+        detected = bool(latest_health and latest_health.get("to") == "UNHEALTHY"
+                        and latest_health.get("consecutive_fails", 0) >= 3)
         if detected:
             break
         try:
             r = httpx.get(f"{URL[primary]}/readyz", timeout=1.0)
             if r.status_code == 200:
+                consecutive_fails = 0
                 break
         except Exception:
             pass
+        consecutive_fails += 1
         time.sleep(0.5)
 
     primary_ok = False
@@ -103,6 +109,7 @@ def run(primary: str, target: str, backend: str, auto: bool) -> dict:
         primary_ok = (r.status_code == 200)
     except Exception:
         pass
+    consecutive_fails = 0 if primary_ok else consecutive_fails + 1
 
     target_ok = False
     try:
@@ -112,11 +119,14 @@ def run(primary: str, target: str, backend: str, auto: bool) -> dict:
         pass
 
     step(1, "xac_nhan_outage", primary=primary, target=target,
-         health_alert_detected=detected, primary_ready=primary_ok, target_alive=target_ok)
+         health_alert_detected=detected, primary_ready=primary_ok, target_alive=target_ok,
+         consecutive_fails=consecutive_fails)
     if primary_ok:
         return {"ok": False, "error": "primary_still_ready"}
     if not target_ok:
         return {"ok": False, "error": "target_unreachable"}
+    if not detected and consecutive_fails < 3:
+        return {"ok": False, "error": "outage_not_confirmed"}
 
     # 2 thong_bao_incident
     if not confirm(auto, f"Xac nhan failover tu {primary} sang {target}?"):

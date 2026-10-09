@@ -9,11 +9,11 @@ diễn tập bằng Ubuntu/WSL, bare mode, localhost ngày 09/10/2026.
 | RTO khi có DR | **28,6 giây — PASS**, mục tiêu 300 giây |
 | RPO tại restore | **4 giây / 2 tài liệu** |
 | Tính hợp lệ | `valid=true`, `warnings=[]`, phục hồi từ region B |
-| Kiểm thử | **18/18 đạt**: 13 kiểm tra của lab và 5 kiểm tra bổ sung |
+| Kiểm thử | **24/24 đạt**: 13 kiểm tra của lab và 11 kiểm tra bổ sung |
 
 Bằng chứng chấm điểm ở [RTO/RPO evidence](reports/rto-evidence.md),
 [runbook](reports/runbook.md), [postmortem](reports/postmortem.md) và
-[log kiểm thử bản GitHub](reports/github-verification.log).
+[log kiểm thử theo checklist](reports/checklist-verification.log).
 Log JSONL giữ lịch sử và thêm nguyên vẹn các dòng của lần chạy mới nhất;
 công cụ đo chọn sự kiện kill cuối trong cửa sổ traffic tương ứng.
 
@@ -30,6 +30,9 @@ python3 tools/measure_rto.py --loadgen reports/drill-2-withdr.jsonl --target-rto
 [GitHub Actions](.github/workflows/lab-checks.yml) kiểm tra code, bằng chứng
 và RTO khi push hoặc mở pull request. Khi chạy thêm diễn tập, dùng thư mục mới
 để bảo toàn bằng chứng đang nộp. Các mục dưới đây là hướng dẫn lab ban đầu.
+
+Nếu dùng Windows, đọc [hướng dẫn Windows/WSL](WINDOWS.md) trước khi chạy:
+phân biệt demo API bằng Python Windows và diễn tập chaos trong Ubuntu.
 
 **Lab format:** 2 hours · **Environment:** fully local, no cloud account required · **Core idea:** kill your own region first, then learn to survive it.
 

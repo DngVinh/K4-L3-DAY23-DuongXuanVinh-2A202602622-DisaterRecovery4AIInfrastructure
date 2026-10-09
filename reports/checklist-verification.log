@@ -1,0 +1,38 @@
+Lab checklist verification — 2026-10-09, Asia/Bangkok.
+13 rubric tests + 11 behavioral tests; fresh checkout copy in Ubuntu/WSL.
+Existing drill evidence unchanged: RTO=28.6s, RPO=4.0s / 2 docs.
+Added outage-confirmation regressions; no new live chaos drill in this review.
+
+============================= test session starts ==============================
+platform linux -- Python 3.14.4, pytest-8.3.4, pluggy-1.6.0 -- /usr/local/bin/python3
+rootdir: /mnt/c/Users/Duong Vinh/K4-L3-DAY23-DuongXuanVinh-2A202602622-DisaterRecovery4AIInfrastructure/.pytest_cache/checklist-verification-20261009/checkout
+collecting ... collected 24 items
+
+tests/test_failover.py::test_rpo_dem_dung_so_doc_bi_mat PASSED           [  4%]
+tests/test_failover.py::test_health_checker_can_threshold_lien_tiep PASSED [  8%]
+tests/test_failover.py::test_failover_khong_cutover_khi_target_chua_ready PASSED [ 12%]
+tests/test_rto_evidence.py::test_drill1_ton_tai_va_khong_phuc_hoi PASSED [ 16%]
+tests/test_rto_evidence.py::test_drill2_hop_le PASSED                    [ 20%]
+tests/test_rto_evidence.py::test_rto_do_duoc_bang_timestamp PASSED       [ 25%]
+tests/test_rto_evidence.py::test_health_check_interval_duoc_ghi_lai PASSED [ 29%]
+tests/test_rto_evidence.py::test_rpo_duoc_do_chu_khong_uoc_luong PASSED  [ 33%]
+tests/test_rto_evidence.py::test_evidence_table_tro_vao_file_that PASSED [ 37%]
+tests/test_rto_evidence.py::test_chaos_khong_giet_ca_hai_region PASSED   [ 41%]
+tests/test_rto_evidence.py::test_evidence_table_da_dien_that PASSED      [ 45%]
+tests/test_rto_evidence.py::test_so_trong_bang_khop_voi_so_trong_log PASSED [ 50%]
+tests/test_rto_evidence.py::test_postmortem_co_gap_analysis PASSED       [ 54%]
+tests/test_runbook_safety.py::test_healthy_primary_does_not_failover PASSED [ 58%]
+tests/test_runbook_safety.py::test_unreachable_target_does_not_failover PASSED [ 62%]
+tests/test_runbook_safety.py::test_same_region_is_rejected PASSED        [ 66%]
+tests/test_runbook_safety.py::test_failed_golden_signals_are_not_reported_as_success[False] PASSED [ 70%]
+tests/test_runbook_safety.py::test_failed_golden_signals_are_not_reported_as_success[True] PASSED [ 75%]
+tests/test_runbook_safety.py::test_single_failure_after_success_does_not_confirm_outage PASSED [ 79%]
+tests/test_runbook_safety.py::test_recovered_health_alert_does_not_confirm_one_failure PASSED [ 83%]
+tests/test_runbook_safety.py::test_declined_confirmation_does_not_call_failover PASSED [ 87%]
+tests/test_runbook_safety.py::test_confirmation_requires_explicit_yes[-False] PASSED [ 91%]
+tests/test_runbook_safety.py::test_confirmation_requires_explicit_yes[n-False] PASSED [ 95%]
+tests/test_runbook_safety.py::test_confirmation_requires_explicit_yes[y-True] PASSED [100%]
+
+============================== 24 passed in 2.18s ==============================
+
+Exit code: 0
