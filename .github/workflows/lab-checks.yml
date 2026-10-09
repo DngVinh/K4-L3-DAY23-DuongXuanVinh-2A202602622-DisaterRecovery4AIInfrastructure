@@ -1,0 +1,37 @@
+name: Lab checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Unit tests and evidence gates
+        run: python -m pytest tests/ -v
+      - name: Validate latest measured RTO
+        run: |
+          python tools/measure_rto.py --loadgen reports/drill-2-withdr.jsonl --target-rto 300
+          python - <<'PY'
+          from pathlib import Path
+          from tools.measure_rto import measure
+          result = measure(Path('reports/drill-2-withdr.jsonl'),
+                           'chaos/chaos-events.jsonl', 'reports/health-events.jsonl',
+                           'reports/failover-events.jsonl', 300)
+          assert result['valid'] and not result['warnings'], result
+          assert result['rto_verdict'] == 'PASS', result
+          PY

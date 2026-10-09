@@ -1,0 +1,14 @@
+{"ts": 1791513614.3373537, "iso": "2026-10-09T02:40:14", "step": 1, "name": "xac_nhan_outage", "primary": "a", "target": "b", "health_alert_detected": true, "primary_ready": false, "target_alive": true}
+{"ts": 1791513614.3431134, "iso": "2026-10-09T02:40:14", "step": 2, "name": "thong_bao_incident", "t_outage": 1791513597.32246, "notification_delay_s": 17.02, "channel": "#dr-incidents"}
+{"ts": 1791513620.5232909, "iso": "2026-10-09T02:40:20", "step": 3, "name": "scale_gpu_pool", "ok": true, "waited_s": 6.04}
+{"ts": 1791513620.524947, "iso": "2026-10-09T02:40:20", "step": 4, "name": "verify_state_replica", "count": 201, "weights": true, "rpo_seconds": 28.0, "docs_lost": 14}
+{"ts": 1791513620.5267684, "iso": "2026-10-09T02:40:20", "step": 5, "name": "dns_cutover", "active_region": "b", "ok": true}
+{"ts": 1791513621.2825267, "iso": "2026-10-09T02:40:21", "step": 6, "name": "verify_golden_signals", "requests": 10, "p95_latency_ms": 43.1, "error_rate": 0.0}
+{"ts": 1791513621.2850308, "iso": "2026-10-09T02:40:21", "step": 7, "name": "post_incident", "elapsed_s": 23.63, "measure_cmd": "python3 tools/measure_rto.py --loadgen reports/drill-2-withdr.jsonl --target-rto 300"}
+{"ts": 1791514837.7598758, "iso": "2026-10-09T03:00:37", "step": 1, "name": "xac_nhan_outage", "primary": "a", "target": "b", "health_alert_detected": true, "primary_ready": false, "target_alive": true}
+{"ts": 1791514837.7650259, "iso": "2026-10-09T03:00:37", "step": 2, "name": "thong_bao_incident", "t_outage": 1791514820.8062427, "notification_delay_s": 16.96, "channel": "#dr-incidents"}
+{"ts": 1791514844.086138, "iso": "2026-10-09T03:00:44", "step": 3, "name": "scale_gpu_pool", "ok": true, "waited_s": 6.15}
+{"ts": 1791514844.0896366, "iso": "2026-10-09T03:00:44", "step": 4, "name": "verify_state_replica", "count": 216, "weights": true, "rpo_seconds": 4.0, "docs_lost": 2}
+{"ts": 1791514844.092465, "iso": "2026-10-09T03:00:44", "step": 5, "name": "dns_cutover", "active_region": "b", "ok": true}
+{"ts": 1791514844.9009943, "iso": "2026-10-09T03:00:44", "step": 6, "name": "verify_golden_signals", "requests": 10, "p95_latency_ms": 44.8, "error_rate": 0.0}
+{"ts": 1791514844.9119375, "iso": "2026-10-09T03:00:44", "step": 7, "name": "post_incident", "elapsed_s": 23.83, "measure_cmd": "python3 tools/measure_rto.py --loadgen reports/drill-2-withdr.jsonl --target-rto 300"}

@@ -15,10 +15,19 @@ reports/*.json
 !reports/failover-events.jsonl
 !reports/health-events.jsonl
 !reports/replication.jsonl
+!reports/measure-latest-drill-1.json
+!reports/measure-latest-drill-2.json
 
 # File tam do test/thu nghiem sinh ra (khong phai bang chung)
 reports/_*.jsonl
 reports/runbook-run.jsonl
+!reports/runbook-run.jsonl
+reports/runbook-evidence.log
+/reports/lab-verification.log
+
+# Ban sao chay thu va goi nop local; ban chinh nam o goc repository.
+/rerun-20261009-01/
+/Lab23-DuongXuanVinh-2A202602622-Submission.zip
 
 # Python
 __pycache__/

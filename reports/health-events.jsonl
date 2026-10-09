@@ -1,0 +1,6 @@
+{"ts": 1791513595.337116, "iso": "2026-10-09T02:39:55", "event": "state_change", "region": "b", "from": "HEALTHY", "to": "UNHEALTHY", "reason": "status_503", "interval_s": 5.0, "threshold": 3, "consecutive_fails": 3}
+{"ts": 1791513612.3089278, "iso": "2026-10-09T02:40:12", "event": "state_change", "region": "a", "from": "HEALTHY", "to": "UNHEALTHY", "reason": "ReadTimeout", "interval_s": 5.0, "threshold": 3, "consecutive_fails": 3}
+{"ts": 1791513622.3368237, "iso": "2026-10-09T02:40:22", "event": "state_change", "region": "b", "from": "UNHEALTHY", "to": "HEALTHY", "reason": "ready", "interval_s": 5.0, "threshold": 3, "consecutive_fails": 0}
+{"ts": 1791514818.6955812, "iso": "2026-10-09T03:00:18", "event": "state_change", "region": "b", "from": "HEALTHY", "to": "UNHEALTHY", "reason": "status_503", "interval_s": 5.0, "threshold": 3, "consecutive_fails": 3}
+{"ts": 1791514835.6473842, "iso": "2026-10-09T03:00:35", "event": "state_change", "region": "a", "from": "HEALTHY", "to": "UNHEALTHY", "reason": "ReadTimeout", "interval_s": 5.0, "threshold": 3, "consecutive_fails": 3}
+{"ts": 1791514845.6777244, "iso": "2026-10-09T03:00:45", "event": "state_change", "region": "b", "from": "UNHEALTHY", "to": "HEALTHY", "reason": "ready", "interval_s": 5.0, "threshold": 3, "consecutive_fails": 0}
